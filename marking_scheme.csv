@@ -1,0 +1,4 @@
+question_no,max_marks,model_answer,keywords
+1,5,"A primary key is a column or a set of columns that uniquely identifies each row in a table. It cannot contain null values and no two rows can have the same primary key value.",unique; row; table; null
+2,5,"Normalization is the process of organizing data in a database to reduce redundancy and improve data integrity by dividing large tables into smaller related tables.",redundancy; integrity; tables
+3,5,"ACID stands for atomicity, consistency, isolation and durability. These properties make sure that database transactions are processed reliably.",atomicity; consistency; isolation; durability

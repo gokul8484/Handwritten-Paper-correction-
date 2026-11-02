@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}{{ exam.title }}{% endblock %}
+{% block content %}
+<h1>{{ exam.title }} <small>{{ exam.subject }}</small></h1>
+<p>Total marks: <b>{{ '%g'|format(exam.total_marks) }}</b> |
+  <a class="button" href="{{ url_for('upload_sheet', exam_id=exam.id) }}">Upload answer sheet</a>
+  {% if exam.sheets %}<a class="button" href="{{ url_for('exam_csv', exam_id=exam.id) }}">Download class CSV</a>{% endif %}
+</p>
+
+<h2>Marking scheme</h2>
+<table>
+  <tr><th>Q</th><th>Max</th><th>Model answer</th><th>Keywords</th></tr>
+  {% for q in exam.questions %}
+  <tr><td>{{ q.number }}</td><td>{{ '%g'|format(q.max_marks) }}</td><td>{{ q.model_answer }}</td><td>{{ q.keywords }}</td></tr>
+  {% endfor %}
+</table>
+
+<h2>Answer sheets</h2>
+{% if exam.sheets %}
+<table>
+  <tr><th>Roll no</th><th>Student</th><th>Status</th><th>Marks</th><th></th></tr>
+  {% for s in exam.sheets %}
+  <tr>
+    <td>{{ s.roll_no }}</td><td>{{ s.student_name }}</td>
+    <td><span class="badge {{ s.status }}">{{ s.status }}</span></td>
+    <td>{% if s.results %}{{ '%g'|format(s.total_final) }} / {{ '%g'|format(exam.total_marks) }}{% else %}-{% endif %}</td>
+    <td>{% if s.status != 'failed' %}<a href="{{ url_for('review_sheet', sheet_id=s.id) }}">Review</a>
+        {% if s.results %} | <a href="{{ url_for('sheet_report', sheet_id=s.id) }}">PDF</a>{% endif %}
+        {% else %}<span title="{{ s.error_message }}">failed</span>{% endif %}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}<p>No answer sheets uploaded yet.</p>{% endif %}
+{% endblock %}

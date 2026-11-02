@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Exams{% endblock %}
+{% block content %}
+<h1>Your exams</h1>
+{% if exams %}
+<table>
+  <tr><th>Title</th><th>Subject</th><th>Questions</th><th>Total marks</th><th>Sheets</th><th></th></tr>
+  {% for e in exams %}
+  <tr>
+    <td>{{ e.title }}</td><td>{{ e.subject }}</td><td>{{ e.questions|length }}</td>
+    <td>{{ '%g'|format(e.total_marks) }}</td><td>{{ e.sheets|length }}</td>
+    <td><a href="{{ url_for('exam_detail', exam_id=e.id) }}">Open</a></td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>No exams yet. <a href="{{ url_for('new_exam') }}">Create your first exam</a> by uploading a marking scheme.</p>
+{% endif %}
+{% endblock %}

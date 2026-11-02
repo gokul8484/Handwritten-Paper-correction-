@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Review marks{% endblock %}
+{% block content %}
+<h1>Review: {{ sheet.student_name }} <small>Roll {{ sheet.roll_no }}</small></h1>
+<p>Exam: <a href="{{ url_for('exam_detail', exam_id=exam.id) }}">{{ exam.title }}</a> |
+  Status: <span class="badge {{ sheet.status }}">{{ sheet.status }}</span> |
+  Total: <b>{{ '%g'|format(sheet.total_final) }} / {{ '%g'|format(exam.total_marks) }}</b>
+  (AI suggested {{ '%g'|format(sheet.total_ai) }})</p>
+
+<details><summary>Show all recognised text</summary><pre>{{ sheet.raw_text }}</pre></details>
+
+<form method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  {% for r in sheet.results %}
+  <div class="card question">
+    <h3>Question {{ r.question_no }} <small>(max {{ '%g'|format(r.question.max_marks) }})</small></h3>
+    <p class="model"><b>Model answer:</b> {{ r.question.model_answer }}</p>
+    <label>Recognised student answer (you may correct OCR mistakes)
+      <textarea name="text_{{ r.id }}" rows="3">{{ r.extracted_text }}</textarea></label>
+    <p class="hint">{{ r.feedback }}</p>
+    <div class="row">
+      <label>AI marks <input value="{{ '%g'|format(r.ai_marks) }}" disabled size="4"></label>
+      <label>Final marks <input name="marks_{{ r.id }}" type="number" step="0.5" min="0"
+             max="{{ r.question.max_marks }}" value="{{ '%g'|format(r.final_marks) }}"></label>
+      <label class="grow">Remark <input name="remarks_{{ r.id }}" value="{{ r.remarks }}"></label>
+    </div>
+  </div>
+  {% endfor %}
+  <div class="actions">
+    <button name="action" value="save">Save changes</button>
+    <button name="action" value="recalculate" title="Recompute AI marks from the corrected text. This resets your final marks.">Recalculate from text</button>
+    <button name="action" value="finalize" class="primary">Finalise marks</button>
+    <a class="button" href="{{ url_for('sheet_report', sheet_id=sheet.id) }}">Download PDF report</a>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,6 @@
+Name: Demo Student   Roll: 101
+Q1. A primary key is a column in a table that uniquely identifies every row.
+It can not be null and it can not repeat.
+Q2. Normalization means arranging data so that there is less duplicate data
+and the data stays correct. Big tables are split into small tables.
+Q3. ACID is a set of properties for transactions. It has atomicity and durability.

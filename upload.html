@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Upload answer sheet{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Upload answer sheet</h1>
+  <p>Exam: <b>{{ exam.title }}</b></p>
+  <form method="post" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Student name <input name="student_name" required value="{{ request.form.get('student_name', '') }}"></label>
+    <label>Roll number <input name="roll_no" required value="{{ request.form.get('roll_no', '') }}"></label>
+    <label>Scanned answer sheet (PDF, PNG, JPG)
+      <input type="file" name="sheet" accept=".pdf,.png,.jpg,.jpeg" required></label>
+    <p class="hint">Tips: scan at 200 to 300 dpi, keep the page upright, and make sure each answer starts
+      with a label such as <code>Q1.</code>, <code>Q2.</code>. Processing can take a while on a computer without a GPU.</p>
+    <button class="primary">Upload and evaluate</button>
+  </form>
+</div>
+{% endblock %}

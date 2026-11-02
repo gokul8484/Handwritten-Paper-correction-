@@ -1,0 +1,32 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #f4f6f9; color: #1d2733; }
+header { background: #1f3a5f; color: #fff; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+header a, header button.link { color: #fff; text-decoration: none; margin-left: 16px; }
+.brand { font-weight: bold; font-size: 18px; margin-left: 0; }
+main { max-width: 980px; margin: 24px auto; padding: 0 16px; }
+h1 small, h3 small { font-weight: normal; color: #5b6b7c; font-size: 0.6em; }
+table { width: 100%; border-collapse: collapse; background: #fff; margin-bottom: 24px; }
+th, td { border: 1px solid #d5dce5; padding: 8px; text-align: left; vertical-align: top; }
+th { background: #e8eef6; }
+.card { background: #fff; border: 1px solid #d5dce5; border-radius: 6px; padding: 16px; margin-bottom: 16px; }
+.card.narrow { max-width: 420px; margin: 40px auto; }
+label { display: block; margin: 10px 0; font-size: 14px; }
+input, textarea, select { display: block; width: 100%; padding: 8px; margin-top: 4px; border: 1px solid #b9c4d0; border-radius: 4px; font: inherit; }
+input[type=file] { border: none; padding: 4px 0; }
+button, a.button { display: inline-block; padding: 8px 14px; border: 1px solid #1f3a5f; background: #fff; color: #1f3a5f; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 14px; }
+button.primary { background: #1f3a5f; color: #fff; }
+button.link { background: none; border: none; padding: 0; text-decoration: underline; }
+form.inline { display: inline; }
+.flash { padding: 10px 14px; border-radius: 4px; margin-bottom: 12px; }
+.flash.ok { background: #e3f5e6; border: 1px solid #9fd3a8; }
+.flash.error { background: #fde8e8; border: 1px solid #e3a0a0; }
+.hint { color: #5b6b7c; font-size: 13px; }
+.row { display: flex; gap: 12px; flex-wrap: wrap; }
+.row label { width: 130px; }
+.row label.grow { flex: 1; width: auto; }
+.actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0 40px; }
+.badge { padding: 2px 8px; border-radius: 10px; font-size: 12px; background: #e8eef6; }
+.badge.finalized { background: #cdebd3; } .badge.failed { background: #f6c9c9; }
+.model { background: #f4f6f9; padding: 8px; border-radius: 4px; }
+pre { white-space: pre-wrap; background: #fff; border: 1px solid #d5dce5; padding: 10px; }
+code { background: #e8eef6; padding: 1px 4px; border-radius: 3px; }

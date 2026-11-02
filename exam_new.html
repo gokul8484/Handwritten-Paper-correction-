@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}New exam{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Create exam</h1>
+  <form method="post" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Exam title <input name="title" required value="{{ request.form.get('title', '') }}"></label>
+    <label>Subject <input name="subject" value="{{ request.form.get('subject', '') }}"></label>
+    <label>Model answers and marking scheme (.csv)
+      <input type="file" name="scheme" accept=".csv" required></label>
+    <p class="hint">Columns: <code>question_no, max_marks, model_answer, keywords</code>.
+      Separate keywords with a semicolon. See <code>sample_data/marking_scheme.csv</code>.</p>
+    <button class="primary">Create exam</button>
+  </form>
+</div>
+{% endblock %}

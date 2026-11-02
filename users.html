@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Users{% endblock %}
+{% block content %}
+<h1>Manage users</h1>
+<table>
+  <tr><th>Username</th><th>Name</th><th>Role</th><th>Active</th><th></th></tr>
+  {% for u in users %}
+  <tr>
+    <td>{{ u.username }}</td><td>{{ u.full_name }}</td><td>{{ u.role }}</td><td>{{ 'yes' if u.active_flag else 'no' }}</td>
+    <td>
+      <form method="post" action="{{ url_for('toggle_user', user_id=u.id) }}" class="inline">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="link">{{ 'Disable' if u.active_flag else 'Enable' }}</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+<div class="card">
+  <h2>Add user</h2>
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Username <input name="username" required></label>
+    <label>Full name <input name="full_name"></label>
+    <label>Password (min 6 characters) <input type="password" name="password" required></label>
+    <label>Role <select name="role"><option value="teacher">teacher</option><option value="admin">admin</option></select></label>
+    <button class="primary">Create user</button>
+  </form>
+</div>
+{% endblock %}
